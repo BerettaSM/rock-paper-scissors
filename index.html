@@ -38,9 +38,20 @@
             }
         }
 
+        function getUserInput() {
+            for(;;) {
+                userInput = toTitleCase(prompt('Choose "Paper", "Rock" or "Scissors": ', ''))
+                if(!!choices[userInput]) return userInput
+                alert('Invalid choice. Try again.')
+            }
+        }
+
+    
+
         const playerSelection = 'rock';
         const computerSelection = getComputerChoice()
-        console.log(playRound(playerSelection,computerSelection))
+        // console.log(playRound(playerSelection,computerSelection))
+        getUserInput()
     </script>
 </body>
 </html>
