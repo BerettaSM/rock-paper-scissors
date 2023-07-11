@@ -46,12 +46,37 @@
             }
         }
 
-    
+        function game() {
+            let playerScore = 0;
+            let computerScore = 0;
 
-        const playerSelection = 'rock';
-        const computerSelection = getComputerChoice()
-        // console.log(playRound(playerSelection,computerSelection))
-        getUserInput()
+            for(let i = 0;i < 5;i++){
+                const playerSelection = getUserInput()
+                const computerSelection = getComputerChoice()
+
+                const result = playRound(playerSelection,computerSelection)
+
+                console.log(result)
+
+                if(result.startsWith('You win')) playerScore++
+                if(result.startsWith('You lose')) computerScore++
+            }
+
+            console.log('\n-= Overall score =-')
+            console.log('Player: ',playerScore)
+            console.log('Computer: ', computerScore)
+            let finalMessage
+            if(playerScore > computerScore) {
+                finalMessage = 'You won the game! Congrats!'
+            } else if(computerScore > playerScore) {
+                finalMessage = 'You lost the game... :('
+            } else {
+                finalMessage = "Close, but no cigar! It's a draw."
+            }
+            console.log(finalMessage)
+        }
+
+        game()
     </script>
 </body>
 </html>
