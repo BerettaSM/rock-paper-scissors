@@ -1,3 +1,5 @@
+const actions = document.querySelector('.actions')
+
 const plays = {
     'rock': {
         beats: 'scissors',
@@ -33,3 +35,7 @@ function playRound(playerSelection,computerSelection) {
     }
 }
 
+const increaseScore = (elementId) => {
+    const ele = document.getElementById(elementId)
+    ele.textContent = +ele.textContent + 1;
+}

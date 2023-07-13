@@ -1,1 +1,103 @@
 @charset "UTF-8";
+
+/*
+*  CSS Reset by Josh Comeau.
+*
+*  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+    isolation: isolate;
+}
+
+.computer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(5vh);
+}
+
+.actions {
+    display: flex;
+    flex-flow: row nowrap;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10vh);
+}
+
+.icon {
+    width: 10rem;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+.icon i {
+    font-size: 7rem;
+}
+
+.score {
+    font-size: 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%) translateX(2rem);
+    text-align: right;
+}
+
+.btn {
+    cursor: pointer;
+    transition: background .3s ease;
+}
+
+.btn:hover {
+    background-color: rgba(170, 168, 168, 0.685);
+}
