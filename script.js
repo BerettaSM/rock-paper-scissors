@@ -1,26 +1,30 @@
-const choices = {
-    'Rock': 'Scissors',
-    'Scissors': 'Paper',
-    'Paper': 'Rock'
-}
-
-function toTitleCase(string) {
-    if(!string) return ''
-    return string[0].toUpperCase() + string.slice(1).toLowerCase()
+const plays = {
+    'rock': {
+        beats: 'scissors',
+        fontAwesomeIconClass: 'fa-regular fa-hand-back-fist'
+    },
+    'scissors': {
+        beats: 'paper',
+        fontAwesomeIconClass: 'fa-regular fa-hand-scissors'
+    },
+    'paper': {
+        beats: 'rock',
+        fontAwesomeIconClass: 'fa-regular fa-hand'
+    },
 }
 
 function getComputerChoice() {
-    const options = Object.keys(choices)
+    const options = Object.keys(plays)
     const rndIndex = Math.floor(Math.random() * options.length)
     return options[rndIndex]
 }
 
 function playRound(playerSelection,computerSelection) {
-    playerSelection = toTitleCase(playerSelection)
-    if(choices[playerSelection] === computerSelection) {
+    playerSelection = playerSelection.toLowerCase()
+    if(plays[playerSelection] === computerSelection) {
         // player wins
         return `You win! ${playerSelection} beats ${computerSelection}`
-    } else if(choices[computerSelection] === playerSelection) {
+    } else if(plays[computerSelection] === playerSelection) {
         // computer wins
         return `You lose! ${computerSelection} beats ${playerSelection}`
     } else {
@@ -29,10 +33,3 @@ function playRound(playerSelection,computerSelection) {
     }
 }
 
-function getUserInput() {
-    for(;;) {
-        userInput = toTitleCase(prompt('Choose "Paper", "Rock" or "Scissors": ', ''))
-        if(!!choices[userInput]) return userInput
-        alert('Invalid choice. Try again.')
-    }
-}
