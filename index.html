@@ -4,79 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <script src="script.js"></script>
 </head>
 <body>
-    <script>
-        const choices = {
-            'Rock': 'Scissors',
-            'Scissors': 'Paper',
-            'Paper': 'Rock'
-        }
-
-        function toTitleCase(string) {
-            if(!string) return ''
-            return string[0].toUpperCase() + string.slice(1).toLowerCase()
-        }
-
-        function getComputerChoice() {
-            const options = Object.keys(choices)
-            const rndIndex = Math.floor(Math.random() * options.length)
-            return options[rndIndex]
-        }
-
-        function playRound(playerSelection,computerSelection) {
-            playerSelection = toTitleCase(playerSelection)
-            if(choices[playerSelection] === computerSelection) {
-                // player wins
-                return `You win! ${playerSelection} beats ${computerSelection}`
-            } else if(choices[computerSelection] === playerSelection) {
-                // computer wins
-                return `You lose! ${computerSelection} beats ${playerSelection}`
-            } else {
-                // draw
-                return "It's a draw!"
-            }
-        }
-
-        function getUserInput() {
-            for(;;) {
-                userInput = toTitleCase(prompt('Choose "Paper", "Rock" or "Scissors": ', ''))
-                if(!!choices[userInput]) return userInput
-                alert('Invalid choice. Try again.')
-            }
-        }
-
-        function game() {
-            let playerScore = 0;
-            let computerScore = 0;
-
-            for(let i = 0;i < 5;i++){
-                const playerSelection = getUserInput()
-                const computerSelection = getComputerChoice()
-
-                const result = playRound(playerSelection,computerSelection)
-
-                console.log(result)
-
-                if(result.startsWith('You win')) playerScore++
-                if(result.startsWith('You lose')) computerScore++
-            }
-
-            console.log('\n-= Overall score =-')
-            console.log('Player: ',playerScore)
-            console.log('Computer: ', computerScore)
-            let finalMessage
-            if(playerScore > computerScore) {
-                finalMessage = 'You won the game! Congrats!'
-            } else if(computerScore > playerScore) {
-                finalMessage = 'You lost the game... :('
-            } else {
-                finalMessage = "Close, but no cigar! It's a draw."
-            }
-            console.log(finalMessage)
-        }
-
-        game()
-    </script>
 </body>
 </html>
