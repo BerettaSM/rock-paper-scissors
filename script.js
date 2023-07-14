@@ -1,16 +1,9 @@
 const actions = document.querySelector('.actions');
+const messages = document.querySelector('.messages')
 
+const ROUNDS = 5
 
-actions.addEventListener('click', event => {
-    // Event delegation. If the item being clicked on is
-    // the buttons wrapper itself, do nothing.
-    if(event.target === event.currentTarget) return
-
-    const clickedButton = event.target.closest('button')
-    const playerChoice = clickedButton.getAttribute('data-play')
-
-    playRound(playerChoice)
-})
+actions.addEventListener('click', listenForAction)
 
 const plays = {
     rock: {
@@ -26,6 +19,18 @@ const plays = {
         fontAwesomeIconClass: 'fa-regular fa-hand',
     },
 };
+
+function listenForAction(event) {
+    // Event delegation. If the item being clicked on is
+    // the buttons wrapper itself, do nothing.
+    if(event.target === event.currentTarget) return
+
+    // Find the button clicked on and get player choice.
+    const clickedButton = event.target.closest('button')
+    const playerChoice = clickedButton.getAttribute('data-play')
+
+    playRound(playerChoice)
+}
 
 function getComputerChoice() {
     const options = Object.keys(plays);
@@ -49,10 +54,7 @@ function playRound(playerChoice) {
     }
 
     displayMessage(message)
-}
-
-function displayMessage(message) {
-    console.log(message)
+    checkForGameOver()
 }
 
 function increaseScore(elementId){
@@ -60,3 +62,32 @@ function increaseScore(elementId){
     ele.textContent = +ele.textContent + 1;
 };
 
+function checkForGameOver() {
+    const pEle = document.getElementById("player");
+    const pScore = +pEle.textContent
+
+    const cEle = document.getElementById('computer')
+    const cScore = +cEle.textContent
+
+    if(pScore < ROUNDS && cScore < ROUNDS) return
+
+    let endResult;
+    if(pScore > cScore) {
+        endResult = `You scored ${ROUNDS} points! You win!`;
+    } else {
+        endResult = `Oh no! Computer scored ${ROUNDS} points... You lose! :(`;
+    }
+    displayMessage(endResult + '\nRefresh to play again.')
+
+    endGame()
+}
+
+function endGame() {
+    for(const button of actions.children)
+        button.disabled = true;
+    actions.removeEventListener('click', listenForAction)
+}
+
+function displayMessage(message) {
+    messages.textContent = message
+}

@@ -67,7 +67,10 @@ h6 {
 }
 
 .messages {
+    font-size: 1.4rem;
+    text-align: center;
     transform: translateX(-50%) translateY(-30vh);
+    white-space: pre;
 }
 
 .actions {
@@ -105,6 +108,11 @@ h6 {
     transition: background .3s ease;
 }
 
-.btn:hover {
+.btn:disabled {
+    border-color: rgb(165, 165, 165);
+    cursor: not-allowed;
+}
+
+.btn:not(:disabled):hover {
     background-color: rgba(170, 168, 168, 0.685);
 }
