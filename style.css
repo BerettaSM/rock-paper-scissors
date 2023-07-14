@@ -60,6 +60,21 @@ h6 {
     transform: translateX(-50%) translateY(5vh);
 }
 
+.display {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    font-size: 1.2rem;
+    text-align: center;
+    transform: translate(-50%, -70%);
+}
+
+.fa-xmark {
+    font-size: 3rem;
+}
+
 .actions, .messages {
     position: absolute;
     bottom: 0;
@@ -81,8 +96,6 @@ h6 {
 
 .icon {
     width: 10rem;
-    border: 2px solid black;
-    border-radius: 30px;
     padding: 1rem;
     margin: 1rem;
     text-align: center;
@@ -95,7 +108,7 @@ h6 {
 .score {
     font-size: 2rem;
     display: flex;
-    flex-flow: column nowrap;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     left: 0;
@@ -104,6 +117,8 @@ h6 {
 }
 
 .btn {
+    border: 2px solid black;
+    border-radius: 30px;
     cursor: pointer;
     transition: background .3s ease;
 }
@@ -115,4 +130,37 @@ h6 {
 
 .btn:not(:disabled):hover {
     background-color: rgba(170, 168, 168, 0.685);
+}
+
+@media (max-width: 768px) {
+    .icon {
+        width: 7rem;
+    }
+
+    .icon i {
+        font-size: 5rem;
+    }
+
+    .score {
+        display: flex;
+        font-size: 1.5rem;
+        flex-direction: row;
+        justify-content: space-around;
+        top: auto;
+        bottom: 0;
+        left: auto;
+        transform: translateY(-50%);
+        text-align: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon {
+        width: 5rem;
+    }
+
+    .icon i {
+        font-size: 3rem;
+    }
 }

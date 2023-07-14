@@ -1,5 +1,6 @@
 const actions = document.querySelector('.actions');
 const messages = document.querySelector('.messages')
+const display = document.querySelector('.display')
 
 const ROUNDS = 5
 
@@ -53,6 +54,7 @@ function playRound(playerChoice) {
         message = "It's a draw!";
     }
 
+    displayChoices(playerChoice, computerChoice)
     displayMessage(message)
     checkForGameOver()
 }
@@ -86,6 +88,23 @@ function endGame() {
     for(const button of actions.children)
         button.disabled = true;
     actions.removeEventListener('click', listenForAction)
+}
+
+function displayChoices(playerChoice, computerChoice) {
+    const playerIcon = plays[playerChoice].fontAwesomeIconClass;
+    const computerIcon = plays[computerChoice].fontAwesomeIconClass;
+    
+    display.innerHTML = `
+    <div>
+        <div class="icon"><i class="fa-regular ${playerIcon}"></i></div>
+        <span>Player</span>
+    </div>
+    <i class="fa-solid fa-xmark"></i>
+    <div>
+        <div class="icon"><i class="fa-regular ${computerIcon}"></i></div>
+        <span>Computer</span>
+    </div>
+    `
 }
 
 function displayMessage(message) {
