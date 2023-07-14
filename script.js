@@ -1,41 +1,62 @@
-const actions = document.querySelector('.actions')
+const actions = document.querySelector('.actions');
+
+
+actions.addEventListener('click', event => {
+    // Event delegation. If the item being clicked on is
+    // the buttons wrapper itself, do nothing.
+    if(event.target === event.currentTarget) return
+
+    const clickedButton = event.target.closest('button')
+    const playerChoice = clickedButton.getAttribute('data-play')
+
+    playRound(playerChoice)
+})
 
 const plays = {
-    'rock': {
+    rock: {
         beats: 'scissors',
-        fontAwesomeIconClass: 'fa-regular fa-hand-back-fist'
+        fontAwesomeIconClass: 'fa-regular fa-hand-back-fist',
     },
-    'scissors': {
+    scissors: {
         beats: 'paper',
-        fontAwesomeIconClass: 'fa-regular fa-hand-scissors'
+        fontAwesomeIconClass: 'fa-regular fa-hand-scissors',
     },
-    'paper': {
+    paper: {
         beats: 'rock',
-        fontAwesomeIconClass: 'fa-regular fa-hand'
+        fontAwesomeIconClass: 'fa-regular fa-hand',
     },
-}
+};
 
 function getComputerChoice() {
-    const options = Object.keys(plays)
-    const rndIndex = Math.floor(Math.random() * options.length)
-    return options[rndIndex]
+    const options = Object.keys(plays);
+    const rndIndex = Math.floor(Math.random() * options.length);
+    return options[rndIndex];
 }
 
-function playRound(playerSelection,computerSelection) {
-    playerSelection = playerSelection.toLowerCase()
-    if(plays[playerSelection] === computerSelection) {
-        // player wins
-        return `You win! ${playerSelection} beats ${computerSelection}`
-    } else if(plays[computerSelection] === playerSelection) {
-        // computer wins
-        return `You lose! ${computerSelection} beats ${playerSelection}`
+function playRound(playerChoice) {
+    playerChoice = playerChoice.toLowerCase();
+    const computerChoice = getComputerChoice()
+    
+    let message;
+    if (plays[playerChoice].beats === computerChoice) {
+        message = `You win! ${playerChoice} beats ${computerChoice}`;
+        increaseScore('player')
+    } else if (plays[computerChoice].beats === playerChoice) {
+        message = `You lose! ${computerChoice} beats ${playerChoice}`;
+        increaseScore('computer')
     } else {
-        // draw
-        return "It's a draw!"
+        message = "It's a draw!";
     }
+
+    displayMessage(message)
 }
 
-const increaseScore = (elementId) => {
-    const ele = document.getElementById(elementId)
-    ele.textContent = +ele.textContent + 1;
+function displayMessage(message) {
+    console.log(message)
 }
+
+function increaseScore(elementId){
+    const ele = document.getElementById(elementId);
+    ele.textContent = +ele.textContent + 1;
+};
+
